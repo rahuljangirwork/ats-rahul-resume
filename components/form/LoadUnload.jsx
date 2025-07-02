@@ -132,7 +132,7 @@ const LoadUnload = () => {
         onClick={(e) =>
           handleDownload(
             resumeData,
-            `${resumeData.name || "resume"} by rahuljangirresume.json`,
+            `${resumeData.name || "rahuljangir"} - Resume.json`,
             e
           )
         }
