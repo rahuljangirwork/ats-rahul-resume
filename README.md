@@ -1,122 +1,51 @@
-# rahuljangirresume
+# 🧠 Rahul Jangir Resume Builder
 
-A cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes. Our platform uses the latest technology to analyze and optimize your resume for maximum visibility and success with applicant tracking systems. Say goodbye to frustration and wasted time spent on manual resume formatting. Create your winning resume with rahuljangirresume today and get noticed by employers.
+A fast, modern, and highly customizable resume builder built for personal use. It’s designed to help job seekers (like myself!) create clean, professional, and ATS-friendly resumes in minutes. With smart section organization, drag-and-drop functionality, and a minimal UI, this project simplifies resume generation and optimization.
 
-## Demo
+> ✅ Built by Rahul Jangir — Full Stack Developer with 3+ years of industry experience.
 
-#### [http://localhost:3000/](http://localhost:3000/)
-![image](https://user-images.githubusercontent.com/61316762/218017511-fbbaa7da-6154-449f-9e46-8de45b0e6c29.png)
+---
 
-### Resume Score
-#### https://www.resumego.net/resume-checker/
-![image](https://user-images.githubusercontent.com/61316762/218143206-f0e5e764-52bc-4c25-84f2-6b2fff00cd4b.png)
+## 🚀 Live Demo
 
-## Change Log
+> 👉 [link here ](https://rahuljangirresume.vercel.app/)
 
-- Drag and drop sections to reorder them in the resume(Work Experience, Projects, Skills)
+![Preview](./public/assets/rsuume-home-1.png)
 
-## Sections
+---
 
-- [Personal Information](#personal-information)
-- [Social Media](#social-media)
-- [Summary](#summary)
-- [Education](#education)
-- [Work Experience](#work-experience)
-- [Projects](#projects)
-- [Technical Skills](#technical-skills)
-- [Soft Skills](#soft-skills)
-- [Languages](#languages)
-- [Additional Skills](#additional-skills)
-- [Certifications](#certifications)
+## ✨ Features
 
-## Personal Information
+- ✅ Create ATS-friendly resumes
+- 🖱️ Drag-and-drop sections (Work Experience, Projects, Skills, etc.)
+- 📄 Export-ready structure for easy copy/paste or PDF formatting
+- ⚙️ Configurable and developer-friendly JSON schema
 
-- Name
-- Email
-- Phone
-- Address
-- Profile Picture
 
-## Social Media
+---
 
-- Social Media Links
+## 📋 Sections Supported
 
-## Summary
+- ✅ Personal Information
+- ✅ Social Media
+- ✅ Summary
+- ✅ Education
+- ✅ Work Experience
+- ✅ Projects
+- ✅ Technical Skills
+- ✅ Soft Skills
+- ✅ Languages
+- ✅ Additional Skills
+- ✅ Certifications
 
-- Summary
+---
 
-## Education
+## 📌 Structure
 
-- Degree
-- Institute
-- Start Date
-- End Date
-
-## Work Experience
-
-- Company
-- Designation
-- Description
-- Key Achievements
-- Start Date
-- End Date
-
-Description optional
-
-## Projects
-
-- Project Name
-- Description
-- key Achievements
-- Start Date
-- End Date
-
-Description optional
-
-## Technical Skills
-
-- Technical Skills
-
-## Soft Skills
-
-- Soft Skills
-
-## Languages
-
-- Languages
-
-## Additional Skills
-
-- Additional Skills
-
-## Certifications
-
-- Certifications
-
-## How to Add Key Achievements
-
-Key achievements are the most important part of your resume. 
-
-- Add key achievements to your resume to make it more attractive and increase your chances of getting noticed by employers.
-- Add key achievements to your work experience and projects.
-- Add key achievements to your resume by clicking on the new line.
-
-## PageSpeed Insights
-
-![image](https://user-images.githubusercontent.com/61316762/218244257-e85172dc-46bd-4f4b-b9c2-9bd17c693cc8.png)
-
-![image](https://user-images.githubusercontent.com/61316762/218244267-c46f5d02-b742-4b4c-ba7e-ae1bfb1e04d4.png)
-
-## License
-
-[MIT](https://github.com/sauravhathi/rahuljangirresume/blob/main/LICENSE.md)
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## Authors and acknowledgment
-
-- [Rahul Jangir](https://github.com/sauravhathi)
+All resume data is stored in a structured JSON file:
+```ts
+const DefaultResumeData = {
+  name: "Rahul Jangir",
+  position: "Senior Software Developer / Systems Architect",
+  ...
+}

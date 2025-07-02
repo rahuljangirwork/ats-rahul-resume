@@ -3,7 +3,7 @@ import Head from "next/head";
 export default function Meta({ title, keywords, description }) {
     const homepage = "http://localhost:3000/";
     const logo = "http://localhost:3000/assets/logo.png";
-    const fevicon = "http://localhost:3000/assets/favicon.ico";
+    const fevicon = "http://localhost:3000/assets/favicon.svg";
 
     function isiteJsonLd() {
         return {

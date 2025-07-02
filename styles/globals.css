@@ -3,64 +3,66 @@
 @tailwind utilities;
 
 @layer base {
-    
+
     body {
         @apply font-sans bg-background text-foreground;
     }
 
-/* === Rounded pastel-grey scrollbars === */
+    /* === Rounded pastel-grey scrollbars === */
 
-::-webkit-scrollbar {
-    @apply w-3 h-3;
-    /* comfy grab size */
-}
+    ::-webkit-scrollbar {
+        @apply w-3 h-3;
+        /* comfy grab size */
+    }
 
-::-webkit-scrollbar-track {
-    @apply bg-gray-100
-    /* very light grey rail */
-    rounded-full;
-}
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-100
+        /* very light grey rail */
+        rounded-full;
+    }
 
-::-webkit-scrollbar-thumb {
-    @apply bg-gray-400
-    /* soft pastel grey */
-    rounded-full shadow-sm;
-    /* slight depth */
-}
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gray-400
+        /* soft pastel grey */
+        rounded-full shadow-sm;
+        /* slight depth */
+    }
 
-::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-500;
-    /* a touch darker on hover */
-}
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-500;
+        /* a touch darker on hover */
+    }
 
-::-webkit-scrollbar-thumb:active {
-    @apply bg-gray-600;
-    /* darker still while dragging */
-}
+    ::-webkit-scrollbar-thumb:active {
+        @apply bg-gray-600;
+        /* darker still while dragging */
+    }
 
-::-webkit-scrollbar-corner {
-    @apply bg-transparent;
-}
+    ::-webkit-scrollbar-corner {
+        @apply bg-transparent;
+    }
 
-/* Firefox fallback (single colour) */
-html {
-    scrollbar-color: #9CA3AF #F3F4F6;
-    /* thumb #9CA3AF ≈ gray-400, track #F3F4F6 ≈ gray-100 */
-    scrollbar-width: thin;
-}
+    /* Firefox fallback (single colour) */
+    html {
+        scrollbar-color: #9CA3AF #F3F4F6;
+        /* thumb #9CA3AF ≈ gray-400, track #F3F4F6 ≈ gray-100 */
+        scrollbar-width: thin;
+    }
 
-    textarea, input:focus {
+    textarea,
+    input:focus {
         @apply focus:outline-none;
     }
 
-    .ul-padding{
+    .ul-padding {
         padding-inline-start: 0.9rem;
     }
 
-    .ul-padding-none{
+    .ul-padding-none {
         padding-inline-start: 0;
     }
-  :root {
+
+    :root {
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;
         --card: 0 0% 100%;
@@ -87,7 +89,8 @@ html {
         --chart-5: 27 87% 67%;
         --radius: 0.5rem;
     }
-  .dark {
+
+    .dark {
         --background: 0 0% 3.9%;
         --foreground: 0 0% 98%;
         --card: 0 0% 3.9%;
@@ -115,44 +118,45 @@ html {
     }
 }
 
-@layer components{
-    .pi{
+@layer components {
+    .pi {
         @apply p-2 mb-2 text-black bg-white rounded text-[0.9rem];
     }
 
-    .profileInput{
+    .profileInput {
         @apply pi file:border-0 file:bg-blue-500 file:text-white file:rounded-sm;
     }
 
-    .flex-col-gap-2{
+    .flex-col-gap-2 {
         @apply flex flex-col gap-2;
     }
 
-    .flex-wrap-gap-2{
+    .flex-wrap-gap-2 {
         @apply flex flex-wrap gap-2;
     }
 
-    .other-input{
+    .other-input {
         @apply p-2 mb-2 text-black bg-white rounded focus:placeholder-transparent;
     }
 
-    .input-title{
+    .input-title {
         @apply text-[1rem] text-white font-semibold;
     }
 
-    .f-col{
+    .f-col {
         @apply flex flex-col;
     }
 
-    .grid-4{
-        @apply grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4;
+    .grid-4 {
+        @apply grid grid-cols-[repeat(auto-fit, minmax(150px, 1fr))] gap-4;
     }
 
-    .editable{
+    .editable {
         @apply hover:bg-gray-100 hover:cursor-text outline-none;
     }
 
 }
+
 /* ------------------- */
 /* Typography Styling  */
 /* ------------------- */
@@ -210,7 +214,7 @@ html {
     }
 
     .preview::after {
-        content: "Created using - http://localhost:3000/";
+        content: "Created using - https://rahuljangirresume.vercel.app/";
         position: fixed;
         bottom: 0;
         right: 0;
@@ -223,10 +227,11 @@ html {
 
 
 @layer base {
-  * {
-    @apply border-border;
+    * {
+        @apply border-border;
     }
-  body {
-    @apply bg-background text-foreground;
+
+    body {
+        @apply bg-background text-foreground;
     }
 }

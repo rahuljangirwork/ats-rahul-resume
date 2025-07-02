@@ -25,23 +25,7 @@ import DefaultResumeData from "../components/utility/DefaultResumeData";
 import { motion, AnimatePresence } from "framer-motion";
 
 
-
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"; // path might need adjusting based on alias config
-
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
-
-import { Menu } from "lucide-react"; // or another icon from tabler
+import Watermark from "../components/utility/Watermark";
 
 /* -------------------------------------------------------------------------- */
 /*  Context setup: lets any child component grab / update resume data easily  */
@@ -65,6 +49,8 @@ export default function Builder() {
   const [resumeData, setResumeData] = useState(DefaultResumeData);
   // Toggles whether the left-hand form pane is visible
   const [formClose, setFormClose] = useState(false);
+
+  
 
   /* ------------- handlers ------------- */
   // Turn an <input type="file"> image into a data URL and store it
@@ -96,29 +82,7 @@ export default function Builder() {
 
 
 
-{/* 
-      <Sheet>
-        <SheetTrigger className="md:hidden p-2 fixed top-4 left-4 z-50 bg-white rounded shadow">
-          <Menu />
-        </SheetTrigger>
-        <SheetContent side="left" className="w-64">
-          <SheetHeader>
-            <SheetTitle>Navigation</SheetTitle>
-          </SheetHeader>
 
-     
-          <div className="mt-4">
-            <LoadUnload />
-          </div>
-
-          <nav className="mt-6 flex flex-col gap-2">
-            <button onClick={() => window.scrollTo(0, 0)}>Top</button>
-            <button onClick={() => document.querySelector("#education")?.scrollIntoView()}>Education</button>
-            <button onClick={() => document.querySelector("#work")?.scrollIntoView()}>Work</button>
-            <button onClick={() => document.querySelector("#projects")?.scrollIntoView()}>Projects</button>
-          </nav>
-        </SheetContent>
-      </Sheet> */}
 
       {/* Provide résumé state + helpers to every child via context */}
       <ResumeContext.Provider
