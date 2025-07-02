@@ -1,97 +1,245 @@
-import React, { useState, createContext, useContext } from "react";
+/* -------------------------------------------------------------------------- */
+/*  Imports                                                                   */
+/* -------------------------------------------------------------------------- */
+import React, { useState, createContext } from "react"; // core React hooks
+import dynamic from "next/dynamic";                     // for client-side only components
+import clsx from "clsx";
+// Form sections
 import Language from "../components/form/Language";
-import Meta from "../components/meta/Meta";
-import FormCP from "../components/form/FormCP";
-import LoadUnload from "../components/form/LoadUnload";
-import Preview from "../components/preview/Preview";
-import DefaultResumeData from "../components/utility/DefaultResumeData";
-import SocialMedia from "../components/form/SocialMedia";
-import WorkExperience from "../components/form/WorkExperience";
-import Skill from "../components/form/Skill";
 import PersonalInformation from "../components/form/PersonalInformation";
+import SocialMedia from "../components/form/SocialMedia";
 import Summary from "../components/form/Summary";
-import Projects from "../components/form/Projects";
 import Education from "../components/form/Education";
-import dynamic from "next/dynamic";
+import WorkExperience from "../components/form/WorkExperience";
+import Projects from "../components/form/Projects";
+import Skill from "../components/form/Skill";
 import Certification from "../components/form/certification";
+import LoadUnload from "../components/form/LoadUnload";
 
+// Meta / preview / controls
+import Meta from "../components/meta/Meta";
+import Preview from "../components/preview/Preview";
+import FormCP from "../components/form/FormCP";
+import DefaultResumeData from "../components/utility/DefaultResumeData";
+
+import { motion, AnimatePresence } from "framer-motion";
+
+
+
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"; // path might need adjusting based on alias config
+
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuLink,
+} from "@/components/ui/navigation-menu";
+
+import { Menu } from "lucide-react"; // or another icon from tabler
+
+/* -------------------------------------------------------------------------- */
+/*  Context setup: lets any child component grab / update resume data easily  */
+/* -------------------------------------------------------------------------- */
 const ResumeContext = createContext(DefaultResumeData);
 
-// server side rendering false
+/* -------------------------------------------------------------------------- */
+/*  Dynamically import Print utility so it only runs in the browser           */
+/*  (avoids Next.js server-side rendering issues with window / DOM access)    */
+/* -------------------------------------------------------------------------- */
 const Print = dynamic(() => import("../components/utility/WinPrint"), {
-  ssr: false,
+  ssr: false, // ‹— disable SSR for this component
 });
 
-export default function Builder(props) {
-  // resume data
+/* -------------------------------------------------------------------------- */
+/*  Page component                                                            */
+/* -------------------------------------------------------------------------- */
+export default function Builder() {
+  /* ------------- state ------------- */
+  // Master copy of the résumé JSON
   const [resumeData, setResumeData] = useState(DefaultResumeData);
-
-  // form hide/show
+  // Toggles whether the left-hand form pane is visible
   const [formClose, setFormClose] = useState(false);
 
-  // profile picture
+  /* ------------- handlers ------------- */
+  // Turn an <input type="file"> image into a data URL and store it
   const handleProfilePicture = (e) => {
     const file = e.target.files[0];
-
     if (file instanceof Blob) {
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = (event) =>
         setResumeData({ ...resumeData, profilePicture: event.target.result });
-      };
       reader.readAsDataURL(file);
     } else {
       console.error("Invalid file type");
     }
   };
 
+  // Generic text/textarea input handler
   const handleChange = (e) => {
     setResumeData({ ...resumeData, [e.target.name]: e.target.value });
-    console.log(resumeData);
+    console.log(resumeData); // dev aid: remove for production
   };
 
+  /* ------------- render ------------- */
   return (
     <>
+
+
+  
+
+
+
+
+{/* 
+      <Sheet>
+        <SheetTrigger className="md:hidden p-2 fixed top-4 left-4 z-50 bg-white rounded shadow">
+          <Menu />
+        </SheetTrigger>
+        <SheetContent side="left" className="w-64">
+          <SheetHeader>
+            <SheetTitle>Navigation</SheetTitle>
+          </SheetHeader>
+
+     
+          <div className="mt-4">
+            <LoadUnload />
+          </div>
+
+          <nav className="mt-6 flex flex-col gap-2">
+            <button onClick={() => window.scrollTo(0, 0)}>Top</button>
+            <button onClick={() => document.querySelector("#education")?.scrollIntoView()}>Education</button>
+            <button onClick={() => document.querySelector("#work")?.scrollIntoView()}>Work</button>
+            <button onClick={() => document.querySelector("#projects")?.scrollIntoView()}>Projects</button>
+          </nav>
+        </SheetContent>
+      </Sheet> */}
+
+      {/* Provide résumé state + helpers to every child via context */}
       <ResumeContext.Provider
-        value={{
-          resumeData,
-          setResumeData,
-          handleProfilePicture,
-          handleChange,
-        }}
+        value={{ resumeData, setResumeData, handleProfilePicture, handleChange }}
       >
+        {/* SEO / <head> tags */}
         <Meta
-          title="ATSResume | Get hired with an ATS-optimized resume"
-          description="ATSResume is a cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes. Our platform uses the latest technology to analyze and optimize your resume for maximum visibility and success with applicant tracking systems. Say goodbye to frustration and wasted time spent on manual resume formatting. Create your winning resume with ATSResume today and get noticed by employers."
-          keywords="ATS-friendly, Resume optimization, Keyword-rich resume, Applicant Tracking System, ATS resume builder, ATS resume templates, ATS-compliant resume, ATS-optimized CV, ATS-friendly format, ATS resume tips, Resume writing services, Career guidance, Job search in India, Resume tips for India, Professional resume builder, Cover letter writing, Interview preparation, Job interview tips, Career growth, Online job applications, resume builder, free resume builder, resume ats, best free resume builder, resume creator, resume cv, resume design, resume editor, resume maker"
+          title={`${resumeData.name || "Rahul Jangir"} | Resume`}
+          description="Explore the professional resume of Rahul Jangir – showcasing skills, experience, education, and projects in a clean, ATS-friendly format."
+          keywords="Rahul Jangir, Resume, Web Developer, Software Engineer, Portfolio, ATS Resume"
         />
-        <div className="f-col gap-4 md:flex-row justify-evenly max-w-7xl md:mx-auto md:h-screen">
-          {!formClose && (
-            <form className="p-4 bg-fuchsia-600 exclude-print md:max-w-[40%] md:h-screen md:overflow-y-scroll">
-              <LoadUnload/>
-              <PersonalInformation />
-              <SocialMedia />
-              <Summary />
-              <Education />
-              <WorkExperience />
-              <Projects />
-              {
-                resumeData.skills.map((skill, index) => (
-                  <Skill
-                    title={skill.title}
-                    key={index}
-                  />
-                ))
-              }
-              <Language />
-              <Certification />
-            </form>
-          )}
-          <Preview />
+
+
+        {/* ---- Main two-pane layout (flex column → row on md screens) ---- */}
+        <div className="h-screen grid grid-rows-[auto_1fr_auto] max-w-7xl mx-auto">
+
+          {/* 🔵 Topbar */}
+          <header className="w-full bg-white border-b px-4 py-3 shadow-sm print:hidden">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+              <LoadUnload />
+              <h1 className="text-lg font-semibold text-gray-700 whitespace-nowrap">
+                ATS Resume Builder
+              </h1>
+            </div>
+          </header>
+
+          {/* 🔧 Main Content */}
+          <main
+            className={clsx(
+              "grid grid-cols-1 min-h-0 overflow-hidden",
+              !formClose && "md:grid-cols-[40%_60%]"
+            )}
+          >
+
+
+            {/* 🔹 Left Form Pane */}
+            {/* {formClose ? null : (
+              <form className="p-4 bg-blue-600 exclude-print h-full overflow-y-auto">
+                <PersonalInformation />
+                <SocialMedia />
+                <Summary />
+                <Education />
+                <WorkExperience />
+                <Projects />
+                {resumeData.skills.map((skill, index) => (
+                  <Skill key={index} title={skill.title} />
+                ))}
+                <Certification />
+                <Language />
+              </form>
+            )} */}
+
+            {!formClose && (
+              <motion.form
+                key="form-pane"
+                initial={{ x: -80, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.25, 0.8, 0.25, 1],
+                }}
+                className="p-4 bg-blue-600 exclude-print h-full overflow-y-auto"
+              >
+                <PersonalInformation />
+                <SocialMedia />
+                <Summary />
+                <Education />
+                <WorkExperience />
+                <Projects />
+                {resumeData.skills.map((skill, index) => (
+                  <Skill key={index} title={skill.title} />
+                ))}
+                <Certification />
+                <Language />
+              </motion.form>
+            )}
+
+
+
+
+            {/* 🔹 Right Preview Pane */}
+            <motion.div
+              className="h-full overflow-y-auto bg-white"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              <Preview />
+            </motion.div>
+          </main>
+
+          {/* 🔻 Footer */}
+          <footer className="w-full bg-gray-50 border-t px-4 py-3 text-center text-sm text-muted-foreground print:hidden">
+            <span>
+              &copy; {new Date().getFullYear()}{" "}
+              <a
+                href="https://rahuljangir.work"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-blue-600 transition"
+              >
+                Rahul Jangir
+              </a>. All rights reserved.
+            </span>
+          </footer>
+
         </div>
+
+
+
+        {/* Floating button set (collapse / print, etc.) */}
         <FormCP formClose={formClose} setFormClose={setFormClose} />
+
+        {/* Window.print() helper (client-only) */}
         <Print />
       </ResumeContext.Provider>
     </>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Re-export the context so other modules can `import { ResumeContext }`     */
+/* -------------------------------------------------------------------------- */
 export { ResumeContext };

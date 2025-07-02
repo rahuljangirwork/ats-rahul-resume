@@ -55,7 +55,7 @@ const Preview = () => {
     { name: "facebook", icon: <FaFacebook /> },
     { name: "instagram", icon: <FaInstagram /> },
     { name: "youtube", icon: <FaYoutube /> },
-    { name: "website", icon: <CgWebsite /> },
+    { name: "portfolio", icon: <CgWebsite /> },
   ];
 
   const onDragEnd = (result) => {
@@ -139,17 +139,39 @@ const Preview = () => {
   useKeyboardShortcut('u', true, toggleUnderline);
 
   return (
-    <div className="md:max-w-[60%] sticky top-0 preview rm-padding-print p-6 md:overflow-y-scroll md:h-screen">
+    <div className="preview w-full h-full overflow-y-auto p-2 print:p-0">
       <A4PageWrapper>
+
+        <div className="w-full text-xs text-gray-500 mb-2 print:block hidden">
+          <table className="w-full">
+            <tbody>
+              <tr>
+                <td className="text-left">
+                  {new Date().toLocaleDateString("en-IN", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </td>
+                <td className="text-right">
+                  {`${resumeData.name || "Rahul Jangir"} | Resume`}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
         <HighlightMenu
           styles={{
-            borderColor: "#C026D3",
-            backgroundColor: "#C026D3",
-            boxShadow: "0px 5px 5px 0px rgba(0, 0, 0, 0.15)",
+            borderColor: "#93C5FD",             // Tailwind 'blue-300'
+            backgroundColor: "#93C5FD",
+            boxShadow: "0px 5px 5px 0px rgba(147, 197, 253, 0.5)", // soft blue-300 glow
             zIndex: 10,
             borderRadius: "5px",
             padding: "3px",
           }}
+        
           target="body"
           menu={() => (
             <>
@@ -200,7 +222,7 @@ const Preview = () => {
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="f-col items-center mb-1">
             {resumeData.profilePicture.length > 0 && (
-              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-fuchsia-700">
+              <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-300">
                 <Image
                   src={resumeData.profilePicture}
                   alt="profile"
@@ -309,11 +331,15 @@ const Preview = () => {
                   </div>
                 )}
               </Droppable>
-              <Language title="Languages" languages={resumeData.languages} />
+           
               <Certification
                 title="Certifications"
                 certifications={resumeData.certifications}
               />
+
+              <Language title="Languages" languages={resumeData.languages} />
+
+              
             </div>
             
             <div className="col-span-2 space-y-2">

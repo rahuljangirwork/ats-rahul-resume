@@ -1,40 +1,41 @@
 import Head from "next/head";
 
 export default function Meta({ title, keywords, description }) {
-    const homepage = "https://atsresume.vercel.app/";
-    const logo = "https://atsresume.vercel.app/assets/logo.png";
-    const fevicon = "https://atsresume.vercel.app/assets/favicon.ico";
+    const homepage = "http://localhost:3000/";
+    const logo = "http://localhost:3000/assets/logo.png";
+    const fevicon = "http://localhost:3000/assets/favicon.ico";
 
     function isiteJsonLd() {
         return {
             __html: `{
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "url": ${homepage},
-                "logo": ${logo},
-                "contactPoint": {
-                    "@type": "ContactPoint",
-                    "telephone": "+91 9999999999",
-                    "contactType": "customer service"
-                },
-                "image": ${logo},
-                "description": ${description},
-                "founder": "Saurav Hathi",
-                "foundingDate": "2023",
-                "foundingLocation": "IN",
-                "email": "xyz@gmail.com",
-                "telephone": "+91 9999999999",
-                "areaServed": "IN",
-                "keywords": ${keywords},
-                "mainEntityOfPage": ${homepage},
-                "knowsAbout": ${keywords},
-                "knowsLanguage": "English",
-                "memberOf": "Saurav Hathi",
-                "owns": "Saurav Hathi",
-                "publishingPrinciples": ${homepage},
-                "slogan": "Get hired with an ATS-optimized resume"
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "url": ${JSON.stringify(homepage)},
+              "logo": ${JSON.stringify(logo)},
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+91 9772725637",
+                "contactType": "customer service"
+              },
+              "image": ${JSON.stringify(logo)},
+              "description": ${JSON.stringify(description)},
+              "founder": "Rahul Jangir",
+              "foundingDate": "2025",
+              "foundingLocation": "IN",
+              "email": "rahuljangir.works@gmail.com",
+              "telephone": "+91 9783351443",
+              "areaServed": "IN",
+              "keywords": ${JSON.stringify(keywords)},
+              "mainEntityOfPage": ${JSON.stringify(homepage)},
+              "knowsAbout": ${JSON.stringify(keywords)},
+              "knowsLanguage": "English",
+              "memberOf": "Rahul Jangir",
+              "owns": "Rahul Jangir",
+              "publishingPrinciples": ${JSON.stringify(homepage)},
+              "slogan": "Design. Code. Deliver."
             }`
-        }
+        };
+          
     }
 
 
@@ -46,8 +47,8 @@ export default function Meta({ title, keywords, description }) {
             <meta charSet="utf-8" />
             <link rel="icon" href={fevicon} />
             <title>{title}</title>
-            <meta type="copyright" content="ATSResume" />
-            <meta type="author" content="Saurav Hathi" />
+            <meta type="copyright" content="rahuljangirresume" />
+            <meta type="author" content="Rahul Jangir" />
             {/* Open Graph */}
             <meta property="og:type" content="website" />
             <meta property="og:url" content={homepage} />
